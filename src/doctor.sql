@@ -14,8 +14,10 @@ CREATE TABLE doctor (
 );
 
 CREATE TABLE doctor_name (
+  id INTEGER,
   first_name TEXT,
-  last_name TEXT
+  last_name TEXT,
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE doctor_availability (
