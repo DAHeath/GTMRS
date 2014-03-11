@@ -12,5 +12,6 @@ CREATE TABLE patient (
   emergency_contact_phone INTEGER,
   height FLOAT,
   weight FLOAT,
+  card_no INTEGER (16),
   PRIMARY KEY (username, name, phone)
 );

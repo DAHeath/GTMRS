@@ -5,6 +5,5 @@ CREATE TABLE doctor_availability (
   license_no INTEGER,
   day DATE,
   start_time TIME,
-  end_time TIME,
-  PRIMARY KEY (username, license_no)
+  end_time TIME
 );
