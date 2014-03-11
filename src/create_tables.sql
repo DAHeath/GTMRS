@@ -1,4 +1,5 @@
 source admin.sql;
+source appointment_request.sql
 source doctor.sql;
 source doctor_availability.sql;
 source doctor_user_message.sql;

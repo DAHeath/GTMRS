@@ -1,5 +1,6 @@
 SHOW TABLES;
 SHOW COLUMNS FROM admin;
+SHoW COLUMNS FROM appointment_request;
 SHOW COLUMNS FROM doctor;
 SHOW COLUMNS FROM doctor_availability;
 SHOW COLUMNS FROM doctor_user_message;
