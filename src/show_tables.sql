@@ -1,0 +1,9 @@
+SHOW TABLES;
+SHOW COLUMNS FROM admin;
+SHOW COLUMNS FROM doctor;
+SHOW COLUMNS FROM doctor_availability;
+SHOW COLUMNS FROM doctor_user_message;
+SHOW COLUMNS FROM patient;
+SHOW COLUMNS FROM rating;
+SHOW COLUMNS FROM surgery;
+SHOW COLUMNS FROM user;

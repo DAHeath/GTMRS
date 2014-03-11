@@ -1,40 +1,19 @@
 DROP TABLE IF EXISTS surgery;
-DROP TABLE IF EXISTS surgery_times;
-DROP TABLE IF EXISTS surgery_type;
-DROP TABLE IF EXISTS surgery_medication;
-
-CREATE TABLE performs (
-  id INTEGER,
-  doctor_license_no INTEGER,
-  patient_id INTEGER,
-  PRIMARY KEY (id)
-);
 
 CREATE TABLE surgery (
-  complications_note TEXT,
-  num_assistants INTEGER,
-  times_id INTEGER,
-  type_id INTEGER,
-  FOREIGN KEY (performs_id) REFERENCES performs(id)
-);
+  cpt_code INTEGER,
 
-CREATE TABLE surgery_times (
-  id INTEGER,
-  anesthesia_start TIMESTAMP,
-  operation_start TIMESTAMP,
-  operation_end TIMESTAMP,
-  PRIMARY KEY (id)
-);
-
-CREATE TABLE surgery_type (
-  id INTEGER,
+  doctor_license_no INTEGER NOT NULL,
+  patient_name VARCHAR (40) NOT NULL,
+  patient_phone INTEGER NOT NULL,
+  surgery_type TEXT,
   cost FLOAT,
-  name TEXT,
-  cpt_code TEXT,
-  PRIMARY KEY (id)
-);
 
-CREATE TABLE surgery_medication (
-  medication TEXT,
-  performs_id INTEGER
+  anesthesia_start_time TIME,
+  surgery_start_time TIME,
+  surgery_end_time TIME,
+  complications TEXT,
+  no_assistants INTEGER,
+
+  PRIMARY KEY (cpt_code)
 );

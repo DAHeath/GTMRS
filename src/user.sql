@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS user;
 
-CREATE TABLE user(
-  name TEXT,
-  password TEXT,
-  PRIMARY KEY (name)
+CREATE TABLE user (
+  username VARCHAR (20),
+  password CHAR (40),
+  PRIMARY KEY (username)
 );
