@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS doctor;
 
 CREATE TABLE doctor (
   username VARCHAR (20),
+  password CHAR (40),
   license_no INTEGER,
   first_name VARCHAR (20),
   last_name VARCHAR (20),

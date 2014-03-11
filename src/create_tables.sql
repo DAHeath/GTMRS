@@ -2,14 +2,15 @@ source admin.sql;
 source appointment_request.sql
 source doctor.sql;
 source doctor_availability.sql;
-source doctor_user_message.sql;
+source doctor_doctor_message.sql;
+source doctor_patient_message.sql;
 source patient.sql;
 source patient_allergy.sql;
+source patient_doctor_message.sql;
 source payment_information.sql;
 source prescription.sql;
 source rating.sql;
 source surgery.sql;
 source surgery_preoperative_medication.sql
-source user.sql;
 source visit.sql;
 source visit_diagnosis.sql;

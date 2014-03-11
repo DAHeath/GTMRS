@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS patient;
 
 CREATE TABLE patient (
   username VARCHAR (20),
+  password CHAR (40),
   name VARCHAR (40),
   phone INTEGER,
   date_of_birth DATETIME,
