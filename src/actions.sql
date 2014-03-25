@@ -55,7 +55,7 @@ WHERE username IN ( SELECT *
 INSERT INTO appointment_request (patient_name, patient_phone, doctor_license_no, date, scheduled_time)
 VALUES ($patient_name, $patient_phone, $doctor_license_no, $date, $scheduled_time);
 
---Order medications
+--Order medications (HALP, NO IDEA - prescriptions?!)
 
 
 --Enter payment information
@@ -67,6 +67,18 @@ SELECT *
 FROM payment_information
 WHERE card_holder_name=$current_name;
 
+--View visit history
+SELECT *
+FROM visit
+WHERE patient_name=$current_patient_name;
 
+--Rate a doctor
+INSERT INTO rating (doctor_license_no, patient_name, patient_phone, rating)
+VALUES ($doctor_license_no, $current_patient_name, $current_patient_phone, $rating);
+
+--View all patient visits
+SELECT *
+FROM visit
+WHERE (doctor_license_no=$current_license AND patient_name=$entered_name AND patient_phone=$entered_phone);
 
 
