@@ -43,3 +43,30 @@ SET name=$name
     , weight=$weight
     , card_no=$card_no
 WHERE username=$current_username;
+
+--Search appointments (done by specialty)
+SELECT *
+FROM doctor_availability
+WHERE username IN ( SELECT *
+                    FROM doctor
+                    WHERE doctor.specialty=$specialty );
+
+--Request appointment
+INSERT INTO appointment_request (patient_name, patient_phone, doctor_license_no, date, scheduled_time)
+VALUES ($patient_name, $patient_phone, $doctor_license_no, $date, $scheduled_time);
+
+--Order medications
+
+
+--Enter payment information
+INSERT INTO payment_information (card_no, cvv, type, card_holder_name, date_of_expiry)
+VALUES ($card_no, $cvv, $type, $card_holder_name, $date_of_expiry)
+
+--Retrieve payment information
+SELECT *
+FROM payment_information
+WHERE card_holder_name=$current_name;
+
+
+
+
