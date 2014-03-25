@@ -67,7 +67,11 @@ SELECT *
 FROM payment_information
 WHERE card_holder_name=$current_name;
 
---View visit history
+--View  visit history
+SELECT *
+FROM visit
+
+--View patient visit history
 SELECT *
 FROM visit
 WHERE patient_name=$current_patient_name;
@@ -81,4 +85,25 @@ SELECT *
 FROM visit
 WHERE (doctor_license_no=$current_license AND patient_name=$entered_name AND patient_phone=$entered_phone);
 
+--View surgeries performed
+SELECT *
+FROM surgery
+WHERE patient_name=$entered_name;
+
+--View appointments for month (ALSO HALP)
+SELECT *
+FROM appointment_request
+WHERE date>$first_day_of_month AND date<$last_day_of_month --this is not right
+
+--View appointments for day
+SELECT *
+FROM appointment_request
+WHERE date=$today;
+
+--Add patient visit
+INSERT INTO visit (date_of_visit, doctor_license_no, patient_name, patient_phone,
+                    billing_amount, diastolic_blood_pressure, systolic_blood_pressure)
+VALUES ($date_of_visit, $doctor_license_no, $patient_name, $patient_phone,
+                    $billing_amount, $diastolic_blood_pressure, $systolic_blood_pressure);
+                    
 
