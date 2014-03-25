@@ -6,5 +6,5 @@ in the Information Flow Diagram.
 
 # Log In
 SELECT password
-FROM admin, doctor, patient
+FROM admin,doctor,patient
 WHERE username=$username;
