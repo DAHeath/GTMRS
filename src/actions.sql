@@ -27,7 +27,7 @@ SET license_no=$license_no
     , specialty=$specialty
     , room_no=$room_no
     , home_address=$home_address
-WHERE username=$current_username
+WHERE username=$current_username;
 
 --Create (or update) Patient Profile
 UPDATE patient
@@ -42,4 +42,4 @@ SET name=$name
     , height=$height
     , weight=$weight
     , card_no=$card_no
-WHERE username=$current_username
+WHERE username=$current_username;
