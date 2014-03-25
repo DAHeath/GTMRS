@@ -143,4 +143,12 @@ WHERE ($current_license_no=doctor_doctor_message.sending_doctor_license_no
         OR $current_user=doctor_patient_message.patient_username
         OR $current_user=patient_doctor_message.patient_username); --this also looks incorrect :(
 
+--View patient billing
+SELECT *
+FROM visit,surgery
+WHERE patient_name=$entered_patient_name;
 
+--View doctor performance
+SELECT *
+FROM rating,surgery
+WHERE doctor_license_no=$current_license_no;
