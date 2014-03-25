@@ -106,4 +106,41 @@ INSERT INTO visit (date_of_visit, doctor_license_no, patient_name, patient_phone
 VALUES ($date_of_visit, $doctor_license_no, $patient_name, $patient_phone,
                     $billing_amount, $diastolic_blood_pressure, $systolic_blood_pressure);
                     
+--Prescribe medication
+INSERT INTO prescription (date_of_visit, doctor_license_no, patient_name, patient_phone,
+                            medicine_name, notes, dosage, duration)
+VALUES ($date_of_visit, $doctor_license_no, $patient_name, $patient_phone,
+                            $medicine_name, $notes, $dosage, $duration);
+                            
+--Create surgery record
+INSERT INTO surgery (cpt_code, doctor_license_no, patient_name, patient_phone, surgery_type,
+                        cost, anesthesia_start_time, surgery_start_time, surgery_end_time,
+                        complications, no_assistants)
+VALUES ($cpt_code, $doctor_license_no, $patient_name, $patient_phone, $surgery_type,
+                        $cost, $anesthesia_start_time, $surgery_start_time, $surgery_end_time,
+                        $complications, $no_assistants);
+                        
+--Send message (Doctor->Doctor)
+INSERT INTO doctor_doctor_message (sending_doctor_license_no, receiving_doctor_license_no,
+                                    content, datetime, status)
+VALUES ($sending_doctor_license_no, $receiving_doctor_license_no, $content, $datetime, $status);
+
+--Send message (Doctor->Patient)
+INSERT INTO doctor_patient_message (doctor_license_no, patient_username, content, datetime, status)
+VALUES ($doctor_license_no, $patient_username, $content, $datetime, $status)
+
+--Send message (Patient->Doctor)
+INSERT INTO patient_doctor_message (patient_username, doctor_license_no, content, datetime, status)
+VALUES ($patient_username, $doctor_license_no, $content, $datetime, $status);
+
+--View inbox
+SELECT *
+FROM doctor_doctor_message,doctor_patient_message,patient_doctor_message
+WHERE ($current_license_no=doctor_doctor_message.sending_doctor_license_no
+        OR $current_license_no=doctor_doctor_message.receiving_doctor_license_no
+        OR $current_license_no=doctor_patient_message.doctor_license_no
+        OR $current_license_no=patient_doctor_message.doctor_license_no
+        OR $current_user=doctor_patient_message.patient_username
+        OR $current_user=patient_doctor_message.patient_username); --this also looks incorrect :(
+
 
