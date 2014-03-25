@@ -4,7 +4,7 @@ needed to replicate the actions specified
 in the Information Flow Diagram.
 */
 
-# Log In
+--Log In
 SELECT password
 FROM admin,doctor,patient
 WHERE username=$username;
