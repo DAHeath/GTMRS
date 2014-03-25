@@ -7,7 +7,6 @@ SHOW COLUMNS FROM doctor_doctor_message;
 SHOW COLUMNS FROM doctor_patient_message;
 SHOW COLUMNS FROM patient;
 SHOW COLUMNS FROM patient_allergy;
-SHOW COLUMNS FROM patient_doctor_message;
 SHOW COLUMNS FROM payment_information;
 SHOW COLUMNS FROM prescription;
 SHOW COLUMNS FROM rating;

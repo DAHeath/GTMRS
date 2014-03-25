@@ -4,8 +4,7 @@ CREATE TABLE surgery (
   cpt_code INTEGER,
 
   doctor_license_no INTEGER NOT NULL,
-  patient_name VARCHAR (40) NOT NULL,
-  patient_phone INTEGER NOT NULL,
+  patient_username VARCHAR(20),
   surgery_type TEXT,
   cost FLOAT,
 
@@ -15,5 +14,7 @@ CREATE TABLE surgery (
   complications TEXT,
   no_assistants INTEGER,
 
-  PRIMARY KEY (cpt_code)
+  PRIMARY KEY (cpt_code),
+  FOREIGN KEY (doctor_license_no) REFERENCES doctor(license_no),
+  FOREIGN KEY (patient_username) REFERENCES patient(username)
 );
