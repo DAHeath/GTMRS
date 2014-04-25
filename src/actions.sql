@@ -4,16 +4,16 @@ needed to replicate the actions specified
 in the Information Flow Diagram.
 */
 
---Log In
-SELECT password
-FROM admin,doctor,patient
-WHERE username=$username;
+--Log In (FIXED)
+SELECT password FROM doctor WHERE username=$username
+UNION
+SELECT password FROM patient WHERE username=$username;
 
---Register (as Doctor)
+--Register (as Doctor) (GOOD)
 INSERT INTO doctor (username, password) --rest of entry is blank until profile is filled out
 VALUES ($username, $password);
 
---Register (as Patient)
+--Register (as Patient) (GOOD)
 INSERT INTO patient (username, password) --again, blank until profile is updated
 VALUES ($username, password);
 
