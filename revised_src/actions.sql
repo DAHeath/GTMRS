@@ -5,13 +5,11 @@ in the Information Flow Diagram.
 */
 
 --Log In (FIXED)
-SELECT password FROM doctor WHERE doctor_username=$username
-UNION
-SELECT password FROM patient WHERE patient_username=$username;
+SELECT password FROM user WHERE username=$username;
 
 --Register (as Doctor) (GOOD)
-INSERT INTO doctor (doctor_username, password) --rest of entry is blank until profile is filled out
-VALUES ($username, $password);
+INSERT INTO user (username, password) VALUES ($username, password);
+INSERT INTO doctor (doctor_username, password) VALUES ($username, $password);
 
 --Register (as Patient) (GOOD)
 INSERT INTO patient (patient_username, password) --again, blank until profile is updated
@@ -56,8 +54,12 @@ WHERE doctor_username IN ( SELECT doctor_username
 INSERT INTO appointments (doctor_username, patient_username, date, time)
 VALUES ($doctor_username, $patient_username, $date, $time);
 
---Order medications (HALP, NO IDEA - prescriptions?!)
-
+--Order medications (FIXED)
+UPDATE prescription
+SET ordered=true
+WHERE medicine_name=$medicine_name
+AND dosage=$dosage
+AND duration=$duration;
 
 --Enter payment information (FIXED)
 INSERT INTO payment_information (card_number, cvv, type, card_holder, date_of_expiry)
@@ -78,7 +80,7 @@ FROM visit
 WHERE patient_username=$current_patient_username;
 
 --Rate a doctor
-INSERT INTO rating (doctor_license_no, patient_name, patient_phone, rating)
+INSERT INTO rating (doctor_username, patient_username, rating)
 VALUES ($doctor_license_no, $current_patient_name, $current_patient_phone, $rating);
 
 --View all patient visits
