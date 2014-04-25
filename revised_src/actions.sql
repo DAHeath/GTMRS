@@ -2,6 +2,10 @@
 This is the list of all SQL queries
 needed to replicate the actions specified
 in the Information Flow Diagram.
+
+REMEMBER:
+1.) VALUES WITH THE $ SIGN ARE SUPPOSED TO BE MANUALLY FED IN
+2.) LOTS OF THOSE VALUES WILL NEED TO BE IN QUOTES (FOR EXAMPLE, DATES)
 */
 
 --Log In (FIXED)
@@ -65,49 +69,37 @@ AND duration=$duration;
 INSERT INTO payment_information (card_number, cvv, type, card_holder, date_of_expiry)
 VALUES ($card_no, $cvv, $type, $card_holder_name, $date_of_expiry)
 
---Retrieve payment information
+--Retrieve payment information (GOOD)
 SELECT *
 FROM payment_information
 WHERE card_holder=$current_name;
 
---View  visit history (GOOD)
+--View entire visit history (GOOD)
 SELECT *
-FROM visit
+FROM visit;
 
---View patient visit history (FIXED)
+--View visit history specific to currently logged in patient (FIXED)
 SELECT *
 FROM visit
 WHERE patient_username=$current_patient_username;
 
---Rate a doctor
-INSERT INTO rating (doctor_username, patient_username, rating)
-VALUES ($doctor_license_no, $current_patient_name, $current_patient_phone, $rating);
-
---View all patient visits
-SELECT *
-FROM visit
-WHERE (doctor_license_no=$current_license AND patient_name=$entered_name AND patient_phone=$entered_phone);
+--Rate a doctor (FIXED)
+INSERT INTO doctor_rating (doctor_username, patient_username, rating)
+VALUES ($doctor_username, $patient_username, $rating);
 
 --View surgeries performed
 SELECT *
 FROM surgery
 WHERE patient_name=$entered_name;
 
---View appointments for month (ALSO HALP)
+--View appointments for month (or any specific date range) (FIXED)
 SELECT *
-FROM appointment_request
-WHERE date>$first_day_of_month AND date<$last_day_of_month --this is not right
+FROM appointments
+WHERE date>$YYYY-MM-DD AND date<$YYYY-MM-DD;
 
---View appointments for day
-SELECT *
-FROM appointment_request
-WHERE date=$today;
-
---Add patient visit
-INSERT INTO visit (date_of_visit, doctor_license_no, patient_name, patient_phone,
-                    billing_amount, diastolic_blood_pressure, systolic_blood_pressure)
-VALUES ($date_of_visit, $doctor_license_no, $patient_name, $patient_phone,
-                    $billing_amount, $diastolic_blood_pressure, $systolic_blood_pressure);
+--Add patient visit (FIXED)
+INSERT INTO visit
+VALUES ($visit_id, $yyyy-mm-dd, $doctor_username, $patient_username, $billingamount, $diastolicBP, $systolicBP);
                     
 --Prescribe medication
 INSERT INTO prescription (date_of_visit, doctor_license_no, patient_name, patient_phone,
