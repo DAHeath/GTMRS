@@ -91,7 +91,7 @@ VALUES ($doctor_username, $patient_username, $rating);
 SELECT *
 FROM surgery;
 
---View appointments for month (or any specific date range) (FIXED)
+--View appointments for any specific date range (FIXED)
 SELECT *
 FROM appointments
 WHERE date>$YYYY-MM-DD AND date<$YYYY-MM-DD;
@@ -120,22 +120,16 @@ VALUES ($patient_username, $doctor_username, $yyyy-mm-dd[SPACE]hh:mm:ss, $conten
 INSERT INTO sendsmessageToPatient
 VALUES ($doctor_username, $patient_username, $yyyy-mm-dd[SPACE]hh:mm:ss, $contentofmessage, $readstatus);
 
---View inbox
+--View inbox (FIXED)
 SELECT *
-FROM doctor_doctor_message,doctor_patient_message,patient_doctor_message
-WHERE ($current_license_no=doctor_doctor_message.sending_doctor_license_no
-        OR $current_license_no=doctor_doctor_message.receiving_doctor_license_no
-        OR $current_license_no=doctor_patient_message.doctor_license_no
-        OR $current_license_no=patient_doctor_message.doctor_license_no
-        OR $current_user=doctor_patient_message.patient_username
-        OR $current_user=patient_doctor_message.patient_username); --this also looks incorrect :(
+FROM sendsmessageToDoc,sendsmessageToPatient;
 
 --View patient billing
 SELECT *
 FROM visit,surgery
 WHERE patient_name=$entered_patient_name;
 
---View doctor performance
+--View doctor performance (SORTA FIXED)
 SELECT *
-FROM rating,surgery
-WHERE doctor_license_no=$current_license_no;
+FROM doctor,doctor_rating,performs
+WHERE doctor.doctor_username=doctor_rating.doctor_username AND doctor_rating.doctor_username=performs.doctor_username;
