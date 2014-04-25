@@ -68,14 +68,14 @@ SELECT *
 FROM payment_information
 WHERE card_holder=$current_name;
 
---View  visit history
+--View  visit history (GOOD)
 SELECT *
 FROM visit
 
---View patient visit history
+--View patient visit history (FIXED)
 SELECT *
 FROM visit
-WHERE patient_name=$current_patient_name;
+WHERE patient_username=$current_patient_username;
 
 --Rate a doctor
 INSERT INTO rating (doctor_license_no, patient_name, patient_phone, rating)
