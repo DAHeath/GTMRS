@@ -17,30 +17,31 @@ VALUES ($username, $password);
 INSERT INTO patient (username, password) --again, blank until profile is updated
 VALUES ($username, password);
 
---Create (or update) Doctor Profile
+--Create (or update) Doctor Profile (FIXED)
 UPDATE doctor
 SET license_no=$license_no
     , first_name=$first_name
     , last_name=$last_name
     , date_of_birth=$date_of_birth
     , work_phone=$work_phone
+    , home_address=$home_address
     , specialty=$specialty
     , room_no=$room_no
-    , home_address=$home_address
 WHERE username=$current_username;
 
---Create (or update) Patient Profile
+--Create (or update) Patient Profile (FIXED)
 UPDATE patient
 SET name=$name
-    , phone=$phone
     , date_of_birth=$date_of_birth
     , gender=$gender
     , address=$address
-    , annual_income=$annual_income
+    , work_phone=$work_phone
+    , home_phone=$home_phone
     , emergency_contact_name=$emergency_contact_name
     , emergency_contact_phone=$emergency_contact_phone
-    , height=$height
     , weight=$weight
+    , height=$height
+    , annual_income=$annual_income
     , card_no=$card_no
 WHERE username=$current_username;
 
