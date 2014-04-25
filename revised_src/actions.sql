@@ -112,18 +112,13 @@ VALUES ($cpt_code, $surgery_type, $cost_of_surgery);
 INSERT INTO surgery_preop_meds (surgery_cpt_code, preop_medication)
 VALUES ($surgery_cpt_code, $preop_medication);
                         
---Send message (Doctor->Doctor)
-INSERT INTO doctor_doctor_message (sending_doctor_license_no, receiving_doctor_license_no,
-                                    content, datetime, status)
-VALUES ($sending_doctor_license_no, $receiving_doctor_license_no, $content, $datetime, $status);
+--Send message to doctor (FIXED)
+INSERT INTO sendsmessageToDoc
+VALUES ($patient_username, $doctor_username, $yyyy-mm-dd[SPACE]hh:mm:ss, $contentofmessage, $readstatus);
 
---Send message (Doctor->Patient)
-INSERT INTO doctor_patient_message (doctor_license_no, patient_username, content, datetime, status)
-VALUES ($doctor_license_no, $patient_username, $content, $datetime, $status)
-
---Send message (Patient->Doctor)
-INSERT INTO patient_doctor_message (patient_username, doctor_license_no, content, datetime, status)
-VALUES ($patient_username, $doctor_license_no, $content, $datetime, $status);
+--Send message to patient (FIXED)
+INSERT INTO sendsmessageToPatient
+VALUES ($doctor_username, $patient_username, $yyyy-mm-dd[SPACE]hh:mm:ss, $contentofmessage, $readstatus);
 
 --View inbox
 SELECT *
