@@ -59,14 +59,14 @@ VALUES ($doctor_username, $patient_username, $date, $time);
 --Order medications (HALP, NO IDEA - prescriptions?!)
 
 
---Enter payment information
-INSERT INTO payment_information (card_no, cvv, type, card_holder_name, date_of_expiry)
+--Enter payment information (FIXED)
+INSERT INTO payment_information (card_number, cvv, type, card_holder, date_of_expiry)
 VALUES ($card_no, $cvv, $type, $card_holder_name, $date_of_expiry)
 
 --Retrieve payment information
 SELECT *
 FROM payment_information
-WHERE card_holder_name=$current_name;
+WHERE card_holder=$current_name;
 
 --View  visit history
 SELECT *
