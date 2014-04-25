@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS doctor_availability;
 
 CREATE TABLE doctor_availability (
-  doctor_username VARCHAR (20),
+  doctor_username VARCHAR(20),
   day DATE,
   start_time TIME,
   end_time TIME,

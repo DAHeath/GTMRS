@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS visit;
 
 CREATE TABLE visit (
-  visit_id INTEGER;
+  visit_id INTEGER,
   date_of_visit DATE,
   doctor_username VARCHAR(20),
   patient_username VARCHAR(20),
