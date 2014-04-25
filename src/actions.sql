@@ -5,29 +5,29 @@ in the Information Flow Diagram.
 */
 
 --Log In (FIXED)
-SELECT password FROM doctor WHERE username=$username
+SELECT password FROM doctor WHERE doctor_username=$username
 UNION
-SELECT password FROM patient WHERE username=$username;
+SELECT password FROM patient WHERE patient_username=$username;
 
 --Register (as Doctor) (GOOD)
-INSERT INTO doctor (username, password) --rest of entry is blank until profile is filled out
+INSERT INTO doctor (doctor_username, password) --rest of entry is blank until profile is filled out
 VALUES ($username, $password);
 
 --Register (as Patient) (GOOD)
-INSERT INTO patient (username, password) --again, blank until profile is updated
+INSERT INTO patient (patient_username, password) --again, blank until profile is updated
 VALUES ($username, password);
 
 --Create (or update) Doctor Profile (FIXED)
 UPDATE doctor
 SET license_no=$license_no
-    , first_name=$first_name
-    , last_name=$last_name
+    , fname=$first_name
+    , lname=$last_name
     , date_of_birth=$date_of_birth
     , work_phone=$work_phone
     , home_address=$home_address
     , specialty=$specialty
     , room_no=$room_no
-WHERE username=$current_username;
+WHERE doctor_username=$current_username;
 
 --Create (or update) Patient Profile (FIXED)
 UPDATE patient
@@ -42,15 +42,15 @@ SET name=$name
     , weight=$weight
     , height=$height
     , annual_income=$annual_income
-    , card_no=$card_no
+    , card_number=$card_no
 WHERE username=$current_username;
 
 --Search appointments (done by specialty) (FIXED)
 SELECT *
 FROM doctor_availability
-WHERE username IN ( SELECT username
-                    FROM doctor
-                    WHERE doctor.specialty=$specialty );
+WHERE doctor_username IN ( SELECT doctor_username
+                           FROM doctor
+                           WHERE specialty=$specialty );
 
 --Request appointment (FIXED)
 INSERT INTO appointments (doctor_username, patient_username, date, time)
