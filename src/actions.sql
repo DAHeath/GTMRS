@@ -45,16 +45,16 @@ SET name=$name
     , card_no=$card_no
 WHERE username=$current_username;
 
---Search appointments (done by specialty)
+--Search appointments (done by specialty) (FIXED)
 SELECT *
 FROM doctor_availability
-WHERE username IN ( SELECT *
+WHERE username IN ( SELECT username
                     FROM doctor
                     WHERE doctor.specialty=$specialty );
 
---Request appointment
-INSERT INTO appointment_request (patient_name, patient_phone, doctor_license_no, date, scheduled_time)
-VALUES ($patient_name, $patient_phone, $doctor_license_no, $date, $scheduled_time);
+--Request appointment (FIXED)
+INSERT INTO appointments (doctor_username, patient_username, date, time)
+VALUES ($doctor_username, $patient_username, $date, $time);
 
 --Order medications (HALP, NO IDEA - prescriptions?!)
 
