@@ -87,10 +87,9 @@ WHERE patient_username=$current_patient_username;
 INSERT INTO doctor_rating (doctor_username, patient_username, rating)
 VALUES ($doctor_username, $patient_username, $rating);
 
---View surgeries performed
+--View surgeries performed (CHANGED, BUT NOT SURE IF CORRECT)
 SELECT *
-FROM surgery
-WHERE patient_name=$entered_name;
+FROM surgery;
 
 --View appointments for month (or any specific date range) (FIXED)
 SELECT *
@@ -107,13 +106,11 @@ INSERT INTO prescription (date_of_visit, doctor_license_no, patient_name, patien
 VALUES ($date_of_visit, $doctor_license_no, $patient_name, $patient_phone,
                             $medicine_name, $notes, $dosage, $duration);
                             
---Create surgery record
-INSERT INTO surgery (cpt_code, doctor_license_no, patient_name, patient_phone, surgery_type,
-                        cost, anesthesia_start_time, surgery_start_time, surgery_end_time,
-                        complications, no_assistants)
-VALUES ($cpt_code, $doctor_license_no, $patient_name, $patient_phone, $surgery_type,
-                        $cost, $anesthesia_start_time, $surgery_start_time, $surgery_end_time,
-                        $complications, $no_assistants);
+--Create surgery record (FIXED)
+INSERT INTO surgery (cpt_code, surgery_type, cost_of_surgery)
+VALUES ($cpt_code, $surgery_type, $cost_of_surgery);
+INSERT INTO surgery_preop_meds (surgery_cpt_code, preop_medication)
+VALUES ($surgery_cpt_code, $preop_medication);
                         
 --Send message (Doctor->Doctor)
 INSERT INTO doctor_doctor_message (sending_doctor_license_no, receiving_doctor_license_no,
