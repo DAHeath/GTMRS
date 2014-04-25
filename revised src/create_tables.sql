@@ -1,0 +1,17 @@
+source user.sql;
+source patient.sql;
+source patient_allergies.sql;
+source doctor.sql;
+source doctor_availability.sql;
+source doctor_rating.sql;
+source payment_information.sql;
+source surgery.sql;
+source surgery_preop_meds.sql;
+source visit.sql;
+source visit_diagnosis.sql;
+source prescription.sql;
+source communicates_with.sql;
+source appointments.sql;
+source performs.sql;
+source sendsmessageToDoc.sql;
+source sendsmessageToPatient.sql;
